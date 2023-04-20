@@ -1,0 +1,14 @@
+[
+  {
+    "tag": "Naming Convention",
+    "description": "Avoid single letter variables"
+  },
+  {
+    "tag": "Naming Convention",
+    "description": "Try to avoid single word variables"
+  },
+  {
+    "tag": "Variable Naming Convention",
+    "description": "Variable Naming Methodology: We try to follow the 4 rules of simple design. Inline with the 2nd rule, we strongly encourage all developers to 'be as explicit as possible'. How we write our code has a huge impact in ensuring that our workflow is highly collaborative, and our software is scalable and maintainable. Constructing variable names is a core practise that all engineers do many times a day, every single day. Good variable construction should help: reduce the need for lengthy code comments, and other engineers to understand what your software logic is trying to do and why. Thus, variables are an excellent place for code authors to offer additional context to their logic. All FE code is compiled and minified, and this includes the names of variables. So we don't need to worry about lengthy variable names bloating our prod bundle size. With the above in mind, we have mapped out a few guidelines (in no particular order): Never construct single letter variables. Try to avoid single word variables (for example: Text, order, or Image). Adding an extra word or 2 gives A LOT of extra context to developers who might be reading your code for the very first time. Don't use abbreviation or acronyms, ever! (an abbreviation might be totally obvious to you, but other developers may not feel the same way) Please use full english words wherever possible. When naming boolean based variables, try to keep them positive instead of negative (more here). Avoid complex inline comparisons including references to 3 or more other variables inside boolean branch logic. Instead, create a variable which accurately describes what the boolean is."
+  }
+]

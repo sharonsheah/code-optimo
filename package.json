@@ -1,0 +1,84 @@
+{
+  "name": "code-optimo",
+  "displayName": "code-optimo",
+  "description": "A VS Code extension to optimize your code according to guidelines you set",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.77.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "code-optimo.helloWorld",
+        "title": "Hello World"
+      },
+      {
+        "command": "code-optimo.showImprovements",
+        "title": "Show Code Improvements",
+        "category": "View",
+        "icon": "path/to/icon",
+        "description": "Displays a list of code improvements for the selected code block."
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "code-optimo.showImprovements",
+        "key": "ctrl+shift+i",
+        "mac": "cmd+shift+i",
+        "when": "editorTextFocus"
+      }
+    ],
+    "configuration": {
+      "title": "Code Optimo",
+      "properties": {
+        "codeOptimo.guidelines": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Enter the guidelines for code improvement suggestions."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js",
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "@types/vscode": "^1.77.0",
+    "@typescript-eslint/eslint-plugin": "^5.56.0",
+    "@typescript-eslint/parser": "^5.56.0",
+    "@vscode/test-electron": "^2.3.0",
+    "dotenv": "^16.0.3",
+    "eslint": "^8.36.0",
+    "glob": "^8.1.0",
+    "mocha": "^10.2.0",
+    "ts-loader": "^9.4.2",
+    "typescript": "^4.9.5",
+    "vscode": "^1.1.37",
+    "webpack": "^5.76.3",
+    "webpack-cli": "^5.0.1"
+  },
+  "dependencies": {
+    "axios": "^1.3.6",
+    "openai": "^3.2.1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
