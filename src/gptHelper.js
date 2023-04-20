@@ -6,9 +6,7 @@ const openai_1 = require("openai");
 require('dotenv').config();
 // Initialize OpenAI API
 const configuration = new openai_1.Configuration({
-    organization: 'org-32gTiyL7rvG1bl5NIracwpJI',
-    // apiKey: process.env.OPENAI_API_KEY,
-    apiKey: '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',
+    apiKey: process.env.OPENAI_API_KEY,
 });
 const openai = new openai_1.OpenAIApi(configuration);
 // Define function to get GPT suggestions
