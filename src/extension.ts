@@ -34,7 +34,7 @@ export function activate(context: vscode.ExtensionContext) {
 
       // Get the guideline from guidelines.json that matches the currently active editor language
       const guidelineObject = guidelines.find(
-        (g) => g.tag === editor.document.languageId
+        (g) => g.languageId === editor.document.languageId
       );
 
       if (!guidelineObject) {

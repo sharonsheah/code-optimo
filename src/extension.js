@@ -48,7 +48,7 @@ function activate(context) {
             return;
         }
         // Get the guideline from guidelines.json that matches the currently active editor language
-        const guidelineObject = guidelines_json_1.default.find((g) => g.tag === editor.document.languageId);
+        const guidelineObject = guidelines_json_1.default.find((g) => g.languageId === editor.document.languageId);
         if (!guidelineObject) {
             vscode.window.showErrorMessage('No matching guideline found for the current language!');
             return;
