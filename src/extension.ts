@@ -25,6 +25,7 @@ export function activate(context: vscode.ExtensionContext) {
       // Get the currently selected code block
       const selection = editor.selection;
       const text = editor.document.getText(selection);
+      console.log(text);
 
       // If there is no selection, display an error message
       if (text === '') {
@@ -44,12 +45,13 @@ export function activate(context: vscode.ExtensionContext) {
         return;
       }
 
-      const guideline = guidelineObject.description;
+      const guideline = guidelineObject.guideline;
+      const guidelineTag = guidelineObject.tag;
 
       try {
         // Get the GPT suggestions for the selected code block
         const suggestions = await getGPTSuggestions(text, guideline);
-
+        console.log(suggestions);
         // Create a new webview panel and set its content
         const panel = vscode.window.createWebviewPanel(
           'codeOptimoPanel',
@@ -64,7 +66,7 @@ export function activate(context: vscode.ExtensionContext) {
         );
         panel.webview.html = generateSuggestionPanelContent(
           suggestions,
-          guideline
+          guidelineTag
         );
       } catch (error) {
         vscode.window.showErrorMessage('Error getting GPT suggestions!');

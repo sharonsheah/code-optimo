@@ -42,6 +42,7 @@ function activate(context) {
         // Get the currently selected code block
         const selection = editor.selection;
         const text = editor.document.getText(selection);
+        console.log(text);
         // If there is no selection, display an error message
         if (text === '') {
             vscode.window.showErrorMessage('No code selected!');
@@ -53,10 +54,12 @@ function activate(context) {
             vscode.window.showErrorMessage('No matching guideline found for the current language!');
             return;
         }
-        const guideline = guidelineObject.description;
+        const guideline = guidelineObject.guideline;
+        const guidelineTag = guidelineObject.tag;
         try {
             // Get the GPT suggestions for the selected code block
             const suggestions = await (0, gptHelper_1.getGPTSuggestions)(text, guideline);
+            console.log(suggestions);
             // Create a new webview panel and set its content
             const panel = vscode.window.createWebviewPanel('codeOptimoPanel', 'Code Optimo', vscode.ViewColumn.Two, {
                 enableScripts: true,
@@ -64,7 +67,7 @@ function activate(context) {
                     vscode.Uri.file(path.join(context.extensionPath, 'media')),
                 ],
             });
-            panel.webview.html = (0, gptHelper_1.generateSuggestionPanelContent)(suggestions, guideline);
+            panel.webview.html = (0, gptHelper_1.generateSuggestionPanelContent)(suggestions, guidelineTag);
         }
         catch (error) {
             vscode.window.showErrorMessage('Error getting GPT suggestions!');

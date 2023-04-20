@@ -1,12 +1,12 @@
 import { Configuration, OpenAIApi } from 'openai';
-import * as vscode from 'vscode';
 
 // Load environment variables
 require('dotenv').config();
 
 // Initialize OpenAI API
 const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
+  // apiKey: process.env.OPENAI_API_KEY,
+  apiKey: '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',
 });
 const openai = new OpenAIApi(configuration);
 
@@ -17,18 +17,24 @@ export async function getGPTSuggestions(
 ): Promise<string[]> {
   try {
     const prompt = `Please provide suggestions to improve the following code based on the guideline: ${guideline}\n\nCode:\n${text}\n\nSuggestions:`;
-    const completions = await openai.createCompletion({
-      model: 'text-davinci-002',
-      prompt: prompt,
-      max_tokens: 50,
-      n: 1,
-      stop: '\n',
+    const completion = await openai.createChatCompletion({
+      model: 'gpt-3.5-turbo',
+      messages: [{ role: 'user', content: prompt }],
     });
-    const suggestions = completions.data.choices
-      .map((c) => c.text?.trim())
-      .filter((suggestion): suggestion is string => suggestion !== undefined);
 
-    if (!suggestions || suggestions.length === 0) {
+    if (!completion.data.choices || completion.data.choices.length === 0) {
+      throw new Error('No completions found!');
+    }
+
+    const suggestions = completion.data.choices.map((choice) => {
+      if (!choice['message']) {
+        throw new Error('No message found!');
+      } else {
+        return choice['message'].content.trim();
+      }
+    });
+
+    if (!suggestions) {
       throw new Error('No suggestions found!');
     }
 
@@ -42,7 +48,7 @@ export async function getGPTSuggestions(
 // Define function to generate HTML content for suggestion panel
 export function generateSuggestionPanelContent(
   suggestions: string[],
-  guideline: string
+  guidelineTag: string
 ): string {
   // Generate list of suggestion items
   const suggestionList = suggestions
@@ -51,7 +57,7 @@ export function generateSuggestionPanelContent(
 
   // Generate HTML content for panel
   return `
-    <h2>Code Optimo - ${guideline}</h2>
+    <h2>Code Optimo - ${guidelineTag}</h2>
     <hr>
     <ul>${suggestionList}</ul>
   `;
