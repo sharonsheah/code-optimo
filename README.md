@@ -7,7 +7,7 @@ Code Optimo is a Visual Studio Code extension that leverages the power of AI to 
 - AI-powered code suggestions: Get relevant suggestions on how to improve your code based on the context and the programming language.
 - Easy integration with Visual Studio Code: Right-click on the selected code block to get suggestions in a new webview panel.
 
-![Code Optimo in action](/images/code-optimo.png)
+![Code Optimo in action](./images/code-optimo.png)
 
 ## Requirements
 
