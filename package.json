@@ -9,18 +9,12 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [
-    "onCommand:code-optimo.showCodeOptimoPanel"
-  ],
+  "activationEvents": [],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "code-optimo.helloWorld",
-        "title": "Hello World"
-      },
-      {
-        "command": "code-optimo.showImprovements",
+        "command": "code-optimo.showCodeOptimoPanel",
         "title": "Show Code Improvements",
         "category": "View",
         "icon": "path/to/icon",
@@ -29,7 +23,7 @@
     ],
     "keybindings": [
       {
-        "command": "code-optimo.showImprovements",
+        "command": "code-optimo.showCodeOptimoPanel",
         "key": "ctrl+shift+i",
         "mac": "cmd+shift+i",
         "when": "editorTextFocus"
