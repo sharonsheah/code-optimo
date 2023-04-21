@@ -16,13 +16,33 @@ Before using this extension, make sure you have the following:
 - Visual Studio Code installed on your machine.
 - An active internet connection, as the extension connects to OpenAI's GPT API for code suggestions.
 
+## Setup
+- `git clone` + set up OpenAI API key
+- Run `npm install`
+- Run `npm run build`
+- Run `vsce package` (this will generate a .vsix file)
+- Go to root directory in the editor file explorer view and right click on `.vsix` file
+- Select `Install Extension VSIX`
+- Go to `Run and Debug` and click the *green play icon* (this should open up another VSCode editor instance; you can choose a repo that you want to test this extension with)
+- Go to a file and highlight a code block
+- `cmd + shift + P` to open Command Palette
+- Type and select`View: Show Code Improvements`
+- Observe Code Optimo panel display on the right
+
+## How to use
+- Install/run Code Optimo extension locally
+- Optional: add additional guidelines in guidelines.json
+- Highlight a code block
+- Use command palette to trigger “show code improvements”
+- Observe panel appear on the right with the guideline it addresses along with the code improvement suggestions
+
 ## Extension Settings
 
 There are no specific settings for this extension.
 
-## Known Issues
+## Known Issues/Limitations
 
-No known issues at the moment. If you encounter any issues, please report them in the GitHub repository.
+Currently, this extension can only read 1 guideline provided in `guidelines.json`. If you encounter any issues, please report them in the GitHub repository.
 
 ## Release Notes
 
