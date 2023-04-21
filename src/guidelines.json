@@ -5,4 +5,12 @@
     "tag": "Variable Naming Convention",
     "description": "The Variable Naming Methodology aims to follow the 4 rules of simple design with a strong emphasis on being as explicit as possible. Constructing variable names is a crucial practice that helps reduce the need for lengthy code comments and allows other engineers to understand the software logic. The guidelines recommend avoiding single letter and single word variables, using full English words, avoiding abbreviations and acronyms, keeping boolean variables positive, and avoiding complex inline comparisons. Good variable naming can significantly impact collaboration, scalability, and maintainability of the software."
   }
+],
+[
+  {
+    "languageId": "typescript",
+    "guideline": "",
+    "tag": "",
+    "description": ""
+  }
 ]
