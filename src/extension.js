@@ -42,7 +42,7 @@ function activate(context) {
         // Get the currently selected code block
         const selection = editor.selection;
         const text = editor.document.getText(selection);
-        console.log(text);
+        console.log('Code selected and extension activated!');
         // If there is no selection, display an error message
         if (text === '') {
             vscode.window.showErrorMessage('No code selected!');
@@ -68,6 +68,8 @@ function activate(context) {
                 ],
             });
             panel.webview.html = (0, gptHelper_1.generateSuggestionPanelContent)(suggestions, guidelineTag);
+            // Add a message listener for the WebView
+            panel.webview.onDidReceiveMessage((message) => handleMessage(message, panel, editor, selection), null, context.subscriptions);
         }
         catch (error) {
             vscode.window.showErrorMessage('Error getting GPT suggestions!');
@@ -78,4 +80,12 @@ function activate(context) {
     context.subscriptions.push(disposable);
 }
 exports.activate = activate;
+async function handleMessage(message, panel, editor, selection) {
+    switch (message.command) {
+        case 'applySuggestion':
+            (0, gptHelper_1.applySuggestion)(message.suggestion, editor, selection);
+            panel.dispose(); // Close the WebView panel after applying the suggestion
+            break;
+    }
+}
 //# sourceMappingURL=extension.js.map

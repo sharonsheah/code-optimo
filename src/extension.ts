@@ -1,7 +1,11 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import guidelines from './guidelines.json';
-import { getGPTSuggestions, generateSuggestionPanelContent } from './gptHelper';
+import {
+  getGPTSuggestions,
+  generateSuggestionPanelContent,
+  applySuggestion,
+} from './gptHelper';
 
 interface Guideline {
   tag: string;
@@ -25,7 +29,7 @@ export function activate(context: vscode.ExtensionContext) {
       // Get the currently selected code block
       const selection = editor.selection;
       const text = editor.document.getText(selection);
-      console.log(text);
+      console.log('Code selected and extension activated!');
 
       // If there is no selection, display an error message
       if (text === '') {
@@ -68,6 +72,13 @@ export function activate(context: vscode.ExtensionContext) {
           suggestions,
           guidelineTag
         );
+
+        // Add a message listener for the WebView
+        panel.webview.onDidReceiveMessage(
+          (message) => handleMessage(message, panel, editor, selection),
+          null,
+          context.subscriptions
+        );
       } catch (error) {
         vscode.window.showErrorMessage('Error getting GPT suggestions!');
         console.log(error);
@@ -77,4 +88,18 @@ export function activate(context: vscode.ExtensionContext) {
 
   // Register the command
   context.subscriptions.push(disposable);
+}
+
+async function handleMessage(
+  message: any,
+  panel: vscode.WebviewPanel,
+  editor: vscode.TextEditor,
+  selection: vscode.Selection
+) {
+  switch (message.command) {
+    case 'applySuggestion':
+      applySuggestion(message.suggestion, editor, selection);
+      panel.dispose(); // Close the WebView panel after applying the suggestion
+      break;
+  }
 }
